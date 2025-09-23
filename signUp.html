@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healistic - Create an Account</title>
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .login-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-card h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .login-card p {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        #togglePassword {
+            left: auto;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: white;
+        }
+
+        .remember-me a {
+            color: white;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .remember-me a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            color: white;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            color: #E94057;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ffcccc;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .background-shape {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .background-shape::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -200px;
+            left: -100px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            .options {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Logo and header styling */
+        .header-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo -->
+            <div class="header-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-brain" style="color: #E94057; font-size: 20px;"></i>
+                </div>
+                <div class="logo-text">Healistic</div>
+            </div>
+            
+            <h2>Create an Account</h2>
+            <p>Join us by filling out the information below.</p>
+            
+            <form id="signupForm" novalidate>
+                <!-- Full Name Input -->
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <!-- Email Input -->
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <i class="fas fa-eye-slash" id="togglePassword"></i>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="options">
+                     <div class="remember-me">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                    </div>
+                </div>
+                 <div class="error-message" id="termsError" style="text-align: center; margin-bottom: 15px;"></div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="login-button" id="signupBtn">Sign Up</button>
+            </form>
+
+            <!-- Sign In Link -->
+            <div class="signup-link">
+                <p>Already have an account? <a href="login1.html">Sign In</a></p>
+            </div>
+        </div>
+        <!-- This is a decorative element -->
+        <div class="background-shape"></div>
+    </div>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const fullNameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const termsCheckbox = document.getElementById('terms');
+            const togglePassword = document.getElementById('togglePassword');
+
+            // Error message containers
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const termsError = document.getElementById('termsError');
+
+            // --- Toggle Password Visibility ---
+            if (togglePassword) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // --- Form Validation on Submit ---
+            signupForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+
+                // Reset previous errors and styles
+                const inputs = [fullNameInput, emailInput, passwordInput, confirmPasswordInput];
+                const errors = [nameError, emailError, passwordError, confirmPasswordError, termsError];
+                
+                inputs.forEach(input => {
+                    if (input) input.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                });
+                errors.forEach(error => {
+                    if (error) error.textContent = '';
+                });
+
+                // 1. Validate Full Name
+                if (!fullNameInput.value.trim()) {
+                    nameError.textContent = 'Full name is required.';
+                    fullNameInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                }
+
+                // 2. Validate Email
+                if (!emailInput.value.trim()) {
+                    emailError.textContent = 'Email is required.';
+                    emailInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    emailError.textContent = 'Please enter a valid email address.';
+                    emailInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                }
+
+                // 3. Validate Password
+                if (!passwordInput.value.trim()) {
+                    passwordError.textContent = 'Password is required.';
+                    passwordInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                } else if (passwordInput.value.length < 8) {
+                    passwordError.textContent = 'Password must be at least 8 characters long.';
+                    passwordInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                }
+
+                // 4. Validate Confirm Password
+                if (!confirmPasswordInput.value.trim()) {
+                    confirmPasswordError.textContent = 'Please confirm your password.';
+                    confirmPasswordInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                } else if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match.';
+                    confirmPasswordInput.style.borderColor = '#ffcccc';
+                    isValid = false;
+                }
+
+                // 5. Validate Terms and Conditions
+                if (!termsCheckbox.checked) {
+                    termsError.textContent = 'You must agree to the Terms & Conditions.';
+                    isValid = false;
+                }
+
+                // If form is valid, submit
+                if (isValid) {
+                    console.log('Form is valid! Creating account...');
+                    alert('Account created successfully! (Check console for data)');
+                    console.log({
+                        fullName: fullNameInput.value,
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    });
+                    // signupForm.submit(); // Uncomment for actual form submission
+                    
+                    // Redirect to login page after successful signup
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            });
+
+            // --- Email validation helper function ---
+            function isValidEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+        });
+    </script> -->
+    <script type="module" src="firebaseAuth.js"></script>
+</body>
+</html>
