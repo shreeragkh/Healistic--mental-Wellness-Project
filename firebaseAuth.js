@@ -4,10 +4,11 @@
     from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
   import { getFirestore, setDoc, doc } 
     from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+    import { FIREBASE_API_KEY } from './.env.js';
 
   // Firebase config
   const firebaseConfig = {
-    apiKey: "AIzaSyBZXnc7Kvx2WYyQ1pDwrO1wauaIKSYv49g",
+    apiKey: FIREBASE_API_KEY,
     authDomain: "healistic-mental-wellness.firebaseapp.com",
     projectId: "healistic-mental-wellness",
     storageBucket: "healistic-mental-wellness.appspot.com", // fixed
@@ -40,14 +41,15 @@
           createdAt: new Date()
       };
       await setDoc(doc(db, "users", uid), userData);
-      alert("User signed up successfully");
+  // Redirect to index.html after successful signup
+  window.location.href = "index.html";
     } catch (error) {
       const errorCode = error.code;
       if(errorCode === 'auth/email-already-in-use'){
-          alert("Email already in use");
+          console.log ("Email already in use");
       }
       else {
-          alert('Unable to create account. Please try again later.');
+          console.log('Unable to create account. Please try again later.');
       }
       console.error("Signup error:", error);
     }
@@ -59,9 +61,10 @@
         const password = document.getElementById("password").value;
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            alert("Signed in successfully");
+            // Redirect to index.html after successful login
             const user = userCredential.user;
             localStorage.setItem('loggedInUserId', user.uid);
+            window.location.href = "index.html";
         }).catch((error) => {
             // alert("Sign in failed: " + error.message);
             const errorCode = error.code;
@@ -69,13 +72,13 @@
                 alert("Incorrect password. Please try again.");
             }
             else if(errorCode === "auth/wrong-password") {
-    alert("Incorrect password. Please try again.");
+    console.log("Incorrect password. Please try again.");
 }
 else if (errorCode === "auth/user-not-found") {
-    alert("Account does not exist. Please sign up.");
+    console.log("Account does not exist. Please sign up.");
 }
             else{
-                alert("Account does not exist. Please sign up.");
+                console.log("Account does not exist. Please sign up.");
             }
             console.error("Signin error:", error);
         });
